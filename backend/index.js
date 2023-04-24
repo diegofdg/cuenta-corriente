@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import db from "./config/db.js";
 import router from "./routes/index.js";
 
@@ -12,6 +13,8 @@ db.authenticate()
     .catch(error => console.log(error.message));
 })
 .catch((error)=>console.log(error.message))
+
+app.use(cors());
 
 app.use('/', router);
 

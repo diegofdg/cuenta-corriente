@@ -4,11 +4,9 @@ export const obtenerClientes = async(req,res,next) => {
   try{
     const result = await Cliente.findAll();
     if(result != ''){ 
-      return res.status(200).json({'Clientes registrados': result});
+      return res.status(200).json(result);
     } else {
-      return res.status(413).json({
-       'Error': 'No existen clientes registrados' 
-      });
+      return res.status(413).json([]);
     }
   }
   catch(error){

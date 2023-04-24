@@ -6,6 +6,6 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
-router.get('/clientes',obtenerClientes);
+router.get('/api/clientes',obtenerClientes);
 
 export default router;
