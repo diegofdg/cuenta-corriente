@@ -1,15 +1,15 @@
 import Formulario from "./Formulario";
-import Resultado from "./Resultado";
-import useCliente from "../hooks/useCliente";
+import useMovimiento from "../hooks/useMovimiento";
+import Movimiento from "./Movimiento";
 
 const AppCliente = () => {
-  const { resultado } = useCliente();
+  const { movimientos } = useMovimiento();
 
   return (
     <>
       <main>
         <Formulario />
-        {resultado.length > 0 && <Resultado />}
+        {movimientos.length > 0 && <Movimiento />}
       </main>
     </>
   )

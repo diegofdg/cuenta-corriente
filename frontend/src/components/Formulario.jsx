@@ -1,11 +1,15 @@
 import { useEffect } from "react";
 import useCliente from "../hooks/useCliente";
+import useMovimiento from "../hooks/useMovimiento";
 
 const Formulario = () => {
-  const { consultarClientes } = useCliente();
+  //const { consultarClientes } = useCliente();
+  const { consultarMovimientos } = useMovimiento();
+  
 
   useEffect(()=>{
-    consultarClientes();
+    //consultarClientes();
+    consultarMovimientos();
   },[])
   
   

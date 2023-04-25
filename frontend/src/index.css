@@ -3,3 +3,11 @@ table, th, td {
   border-collapse: collapse;
   padding: 10px;
 }
+
+.tabla-id {
+  text-align: center;
+}
+
+.tabla-importe {
+  text-align: right;
+}
