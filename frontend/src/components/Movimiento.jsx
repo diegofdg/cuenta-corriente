@@ -4,20 +4,21 @@ import useMovimiento from "../hooks/useMovimiento";
 const Movimiento = () => {
   const { movimientos } = useMovimiento([]);
   const [ total, setTotal ] = useState([]);
+  const [ cliente, setCliente ] = useState('');
 
   useEffect(()=> {
     const calculoTotal = movimientos.reduce((total, movimiento) => total + Number(movimiento.importe), 0).toFixed(2);
-    setTotal(calculoTotal)
+    setTotal(calculoTotal);
+    setCliente(movimientos[0].cliente.nombre);
   },[movimientos]);
 
   return (
     <div>
       <table>
+        <caption>DETALLE DEL CLIENTE <strong>{cliente.toUpperCase()}</strong></caption>
         <thead>
           <tr>
-            <th>ID</th>
             <th>FECHA</th>
-            <th>CLIENTE ID</th>
             <th>DETALLE</th>
             <th>IMPORTE</th>
           </tr>
@@ -26,14 +27,8 @@ const Movimiento = () => {
       
         {movimientos?.map(movimiento => (
           <tr key={movimiento.id}>
-            <td className="tabla-id">
-              {movimiento.id}
-            </td>
             <td>
               {movimiento.fecha}
-            </td>
-            <td className="tabla-id">
-              {movimiento.clienteId}
             </td>
             <td>
               {movimiento.detalle}
@@ -46,7 +41,7 @@ const Movimiento = () => {
         </tbody>
         <tfoot>
           <tr>
-            <th colSpan='4' className="tabla-importe">SALDO</th>
+            <th colSpan='2' className="tabla-importe">SALDO</th>
             <th className="tabla-importe">{total}</th>          
           </tr>
         </tfoot>
