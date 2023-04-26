@@ -6,7 +6,7 @@ export const obtenerClientes = async(req,res,next) => {
     if(result != ''){ 
       return res.status(200).json(result);
     } else {
-      return res.status(413).json([]);
+      return res.status(200).json([]);
     }
   }
   catch(error){

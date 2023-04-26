@@ -1,5 +1,6 @@
 import { useState, createContext } from 'react';
 import axios from 'axios';
+import clienteAxios from "../config/clienteAxios";
 
 const ClienteContext = createContext();
 
@@ -9,9 +10,7 @@ const ClienteProvider = ({children}) => {
 
   const consultarClientes = async () => {
     try {
-      const url = `http://localhost:4000/api/clientes`;      
-      const { data } = await axios(url);
-
+      const { data } = await clienteAxios('/clientes');      
       setResultado(data);
     } catch (error) {
       setResultado({});

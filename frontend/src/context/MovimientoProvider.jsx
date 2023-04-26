@@ -1,5 +1,6 @@
 import { useState, createContext } from 'react';
 import axios from 'axios';
+import clienteAxios from "../config/clienteAxios";
 
 const MovimientoContext = createContext();
 
@@ -9,9 +10,7 @@ const MovimientoProvider = ({children}) => {
 
   const consultarMovimientos = async () => {
     try {
-      const url = `http://localhost:4000/api/movimientos`;      
-      const { data } = await axios(url);
-
+      const { data } = await clienteAxios('/movimientos');
       setMovimientos(data);
     } catch (error) {
       setMovimientos({});
