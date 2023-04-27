@@ -15,17 +15,12 @@ const Clientes = () => {
     <>
       <nav>
         <Link
-          to="/"
-        >
-          Inicio
-        </Link>
-        <Link
           to="/movimientos"
         >
           Movimientos
         </Link>
-      </nav>  
-      <div>      
+      </nav>
+      <div>
         {clientes?.length > 0 ? (
           clientes[0] === 'Ha ocurrido un error' ? 
           'Ha ocurrido un error' : 
@@ -38,6 +33,7 @@ const Clientes = () => {
                 <th>TELEFONO</th>
                 <th>EMAIL</th>
                 <th>CONDICION</th>
+                <th>ACCIONES</th>
               </tr>
             </thead>
             <tbody>

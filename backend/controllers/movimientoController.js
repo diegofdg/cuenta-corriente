@@ -24,7 +24,43 @@ export const obtenerMovimientos = async(req,res,next) => {
     if(result != ''){ 
       return res.status(200).json(result);
     } else {
-      return res.status(413).json([]);
+      return res.status(200).json([]);
+    }
+  }
+  catch(error){
+    next(error);
+  }
+}
+
+export const obtenerMovimientosCliente = async(req,res,next) => {
+  const { id } = req.params;
+
+  try{
+    const result = await Movimiento.findAll(
+      {
+        where: {
+          estado: 1,
+        },
+        attributes: ['id', 'fecha', 'detalle', 'importe'],
+        include: [
+          {
+            attributes: ['nombre'],
+            model: Cliente,
+            where: {
+              id
+            },
+            as: 'cliente',
+          },
+        ],
+        order: [
+          ['fecha', 'asc']
+        ]
+      }
+    );
+    if(result != ''){ 
+      return res.status(200).json(result);
+    } else {
+      return res.status(200).json([]);
     }
   }
   catch(error){
