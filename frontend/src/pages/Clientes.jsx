@@ -1,5 +1,5 @@
 import { obtenerClientes } from '../data/Clientes';
-import { useLoaderData, Link } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import Cliente from '../components/Cliente';
 
 export function loader() {
@@ -9,22 +9,15 @@ export function loader() {
 
 const Clientes = () => {
   const clientes = useLoaderData();
-  console.log(clientes)
  
   return (
     <>
-      <nav>
-        <Link
-          to="/movimientos"
-        >
-          Movimientos
-        </Link>
-      </nav>
       <div>
         {clientes?.length > 0 ? (
           clientes[0] === 'Ha ocurrido un error' ? 
           'Ha ocurrido un error' : 
           <table>
+            <caption>LISTADO DE CLIENTES</caption>
             <thead>
               <tr>
                 <th>ID</th>
@@ -44,6 +37,8 @@ const Clientes = () => {
           </table>
         ) : 'No hay clientes registrados'}
       </div>
+      <br /><br />
+      <div>Página 1 de 1</div>
     </>
   )
 }

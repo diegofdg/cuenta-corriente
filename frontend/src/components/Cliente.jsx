@@ -2,11 +2,6 @@ import { Link } from 'react-router-dom';
 
 const Cliente = ({clientes}) => {
 
-  const handleClickVerDeuda = (e)=> {
-    e.preventDefault();
-    console.log(e);
-  }
-
   return (
     <>
       {clientes?.map(cliente => (
