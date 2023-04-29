@@ -11,3 +11,8 @@ table, th, td {
 .tabla-importe {
   text-align: right;
 }
+
+.error {
+  color: red;
+  font-weight: bold;
+}

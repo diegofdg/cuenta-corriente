@@ -1,5 +1,5 @@
 import { obtenerClientes } from '../data/Clientes';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, Link } from 'react-router-dom';
 import Cliente from '../components/Cliente';
 
 export function loader() {
@@ -37,6 +37,12 @@ const Clientes = () => {
           </table>
         ) : 'No hay clientes registrados'}
       </div>
+      <br /><br />
+        <Link
+          to={`/clientes/agregar`}
+        >
+          Agregar Cliente
+        </Link>
       <br /><br />
       <div>Página 1 de 1</div>
     </>

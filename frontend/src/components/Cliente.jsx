@@ -26,10 +26,10 @@ const Cliente = ({clientes}) => {
           </td>
           <td>
             <Link
-              to={`/movimientos/${cliente.id}`}
-          >
-            Ver Deuda
-          </Link>
+              to={`/movimientos/${cliente.id}/consulta`}
+            >
+              Ver Deuda
+            </Link>
           </td>
         </tr>        
       ))}

@@ -18,10 +18,11 @@ const Cliente = db.define('cliente', {
       type:Sequelize.STRING(50)
     },
     telefono:{
-      type:Sequelize.STRING(20)
+      type:Sequelize.STRING(50)
     },
     condicion:{
-      type:Sequelize.STRING(20)
+      type:Sequelize.STRING(50),
+      defaultValue: 'Consumidor Final'
     },
     estado: {
       type:Sequelize.BOOLEAN,
