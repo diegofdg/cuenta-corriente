@@ -30,8 +30,13 @@ const Cliente = ({clientes}) => {
             >
               Ver Deuda
             </Link>
+            <Link
+              to={`/movimientos/${cliente.id}/agregar`}
+            >
+              Agregar Movimiento
+            </Link>
           </td>
-        </tr>        
+        </tr>
       ))}
     </>
   )

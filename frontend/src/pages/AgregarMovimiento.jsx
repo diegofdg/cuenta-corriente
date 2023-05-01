@@ -1,9 +1,9 @@
-import { useNavigate, Form, useActionData, redirect } from 'react-router-dom';
-import FormularioClientes from '../components/FormularioClientes';
-import { agregarCliente } from '../data/Clientes';
+import { useNavigate, Form, useActionData, redirect, useParams } from 'react-router-dom';
+import FormularioMovimientos from '../components/FormularioMovimientos';
+import { agregarMovimiento } from '../data/Movimientos';
 import Error from '../components/Error';
 
-export async function action({ request }) {
+export async function action({ request, params }) {
   const formData = await request.formData();
   const datos = Object.fromEntries(formData);
 
@@ -18,21 +18,21 @@ export async function action({ request }) {
     return errores;
   }
 
-  await agregarCliente(datos);
+  await agregarMovimiento(params.clienteId, datos);
   return redirect('/');
 }
 
-function AgregarCliente() {
+function AgregarMovimiento() {
   const navigate = useNavigate();
   const errores = useActionData();
 
   return (
     <>
-      <h1>Nuevo Cliente</h1>
+      <h1>Nuevo Movimiento</h1>
       <div>
         <button
           type='button'
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
         >
           Volver
         </button>
@@ -43,10 +43,11 @@ function AgregarCliente() {
         <Form
           method="POST"
         >
-          <FormularioClientes />
+          <FormularioMovimientos
+          />
           <input
             type="submit"
-            value="Registrar Cliente"
+            value="Registrar Movimiento"
           />
         </Form>
       </div>
@@ -54,4 +55,4 @@ function AgregarCliente() {
   )
 }
 
-export default AgregarCliente;
+export default AgregarMovimiento;

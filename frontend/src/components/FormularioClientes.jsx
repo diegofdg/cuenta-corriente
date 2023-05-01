@@ -66,7 +66,7 @@ const Formulario = () => {
       </div>
 
       <div>
-        <label for="condicion">
+        <label htmlFor="condicion">
           Situación Fiscal
         </label>
         <select

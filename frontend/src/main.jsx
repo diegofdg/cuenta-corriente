@@ -5,6 +5,7 @@ import Layout from './components/Layout.jsx';
 import Cliente, { loader as clientesLoader } from './pages/Clientes.jsx';
 import Movimiento , { loader as movimientosLoader }from './pages/Movimientos.jsx';
 import AgregarCliente, { action as agregarClienteAction} from './pages/AgregarCliente.jsx';
+import AgregarMovimiento, { action as agregarMovimientoAction} from './pages/AgregarMovimiento.jsx';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -18,15 +19,19 @@ const router = createBrowserRouter([
         loader: clientesLoader
       },
       {
-        path: '/movimientos/:id/consulta',
+        path: '/movimientos/:clienteId/consulta',
         element: <Movimiento />,
         loader: movimientosLoader
       },
       {
         path: '/clientes/agregar',
         element: <AgregarCliente />,
-        action: agregarClienteAction,
-        loader: movimientosLoader
+        action: agregarClienteAction
+      },
+      {
+        path: '/movimientos/:clienteId/agregar',
+        element: <AgregarMovimiento />,
+        action: agregarMovimientoAction
       }
     ]
   }

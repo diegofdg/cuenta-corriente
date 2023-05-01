@@ -4,8 +4,8 @@ import { obtenerMovimientosCliente } from "../data/Movimientos";
 import Movimiento from "../components/Movimiento";
 
 export function loader({params}) {
-  const { id } = params;
-  const movimientos = obtenerMovimientosCliente(id);
+  const { clienteId } = params;
+  const movimientos = obtenerMovimientosCliente(clienteId);
   return movimientos;
 }
 
