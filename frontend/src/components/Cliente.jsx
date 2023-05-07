@@ -25,6 +25,11 @@ const Cliente = ({clientes}) => {
             {cliente.condicion}
           </td>
           <td>
+          <Link
+              to={`/clientes/${cliente.id}/editar`}
+            >
+              Editar Cliente
+            </Link>
             <Link
               to={`/movimientos/${cliente.id}/consulta`}
             >

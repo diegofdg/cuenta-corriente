@@ -1,4 +1,8 @@
-const Formulario = () => {
+import { useEffect, useState } from "react";
+
+const Formulario = ({cliente}) => {
+
+  const [ condicion, setCondicion ] = useState('');
 
   const CONDICIONES = [
     { id: 1, condicion: 'Monotributista' },
@@ -7,6 +11,14 @@ const Formulario = () => {
     { id: 4, condicion: 'Responsable No Inscripto' },
     { id: 5, condicion: 'Exento' },
   ];
+
+  useEffect(()=>{
+    setCondicion(cliente?.condicion);
+  },[]);  
+
+  const handleChangeCondicion = (dato)=> {    
+    setCondicion(dato);
+  }
 
   return (
     <>
@@ -21,6 +33,7 @@ const Formulario = () => {
           type="text"
           placeholder="Nombre del Cliente"
           name="nombre"
+          defaultValue={cliente?.nombre}
         />
       </div>
       <div>
@@ -34,6 +47,7 @@ const Formulario = () => {
           type="text"
           placeholder="CUIL del Cliente"
           name="cuil"
+          defaultValue={cliente?.cuil}
         />
       </div>
 
@@ -48,6 +62,7 @@ const Formulario = () => {
           type="tel"
           placeholder="Teléfono del Cliente"
           name="telefono"
+          defaultValue={cliente?.telefono}
         />
       </div>
 
@@ -62,6 +77,7 @@ const Formulario = () => {
           type="email"
           placeholder="Email del Cliente"
           name="email"
+          defaultValue={cliente?.email}
         />
       </div>
 
@@ -72,6 +88,9 @@ const Formulario = () => {
         <select
           id="condicion"
           name="condicion"
+          onChange={e => handleChangeCondicion(e.target.value)}
+          value={condicion}
+
         >
           <option value="">-- Selecciona Situación --</option>
           {CONDICIONES.map(item => (

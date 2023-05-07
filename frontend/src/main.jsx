@@ -4,8 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import Cliente, { loader as clientesLoader } from './pages/Clientes.jsx';
 import Movimiento , { loader as movimientosLoader }from './pages/Movimientos.jsx';
-import AgregarCliente, { action as agregarClienteAction} from './pages/AgregarCliente.jsx';
-import AgregarMovimiento, { action as agregarMovimientoAction} from './pages/AgregarMovimiento.jsx';
+import AgregarCliente, { action as agregarClienteAction } from './pages/AgregarCliente.jsx';
+import AgregarMovimiento, { action as agregarMovimientoAction } from './pages/AgregarMovimiento.jsx';
+import EditarCliente, { action as editarClienteAction, loader as editarClienteLoader } from './pages/EditarCliente.jsx';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -27,6 +28,13 @@ const router = createBrowserRouter([
         path: '/clientes/agregar',
         element: <AgregarCliente />,
         action: agregarClienteAction
+      },
+      ,
+      {
+        path: '/clientes/:clienteId/editar',
+        element: <EditarCliente />,
+        loader: editarClienteLoader,
+        action: editarClienteAction
       },
       {
         path: '/movimientos/:clienteId/agregar',
