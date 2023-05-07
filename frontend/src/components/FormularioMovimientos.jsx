@@ -1,6 +1,20 @@
-const FormularioMovimientos = () => {
+const FormularioMovimientos = ({movimiento}) => {
+  console.log(movimiento.clienteId)
   return (
     <>
+      <div className="oculto">
+        <label
+          htmlFor="clienteId"
+        >
+          Cliente Id:
+        </label>
+        <input 
+          id="clienteId"
+          type="number"
+          name="clienteId"
+          defaultValue={movimiento?.clienteId}
+        />
+      </div>
       <div>
         <label
           htmlFor="fecha"
@@ -11,6 +25,7 @@ const FormularioMovimientos = () => {
           id="fecha"
           type="date"
           name="fecha"
+          defaultValue={movimiento?.fecha}
         />
       </div>
       
@@ -25,6 +40,7 @@ const FormularioMovimientos = () => {
           type="text"
           placeholder="Detalle del movimiento"
           name="detalle"
+          defaultValue={movimiento?.detalle}
         />
       </div>
 
@@ -38,6 +54,7 @@ const FormularioMovimientos = () => {
           id="importe"
           type="number"
           name="importe"
+          defaultValue={movimiento?.importe}
         />
       </div>
     </>

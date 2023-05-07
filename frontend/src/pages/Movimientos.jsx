@@ -43,6 +43,7 @@ const Movimientos = () => {
                 <th>FECHA</th>
                 <th>DETALLE</th>
                 <th>IMPORTE</th>
+                <th>ACCIONES</th>
               </tr>
             </thead>
             <tbody>

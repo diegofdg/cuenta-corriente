@@ -16,3 +16,7 @@ table, th, td {
   color: red;
   font-weight: bold;
 }
+
+.oculto {
+  display: none;
+}

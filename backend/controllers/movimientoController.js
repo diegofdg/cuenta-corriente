@@ -32,6 +32,49 @@ export const obtenerMovimientos = async(req,res,next) => {
   }
 }
 
+export const obtenerMovimiento = async(req,res,next) => {  
+  const { id } = req.params;
+
+  try{
+    const result = await Movimiento.findByPk(id);
+    if(result != ''){ 
+      return res.status(200).json(result);
+    } else {
+      return res.status(200).json([]);
+    }
+  }
+  catch(error){
+    next(error);
+  }
+}
+
+export const editarMovimiento = async(req,res,next) => {
+  const { id } = req.params;
+  const { fecha, detalle, importe } = req.body;
+  try{
+    if(!fecha || !detalle || !importe) {
+      return res.status(400).json([]);
+    };
+    const result = await Movimiento.update({
+      fecha, detalle, importe
+    },
+    {
+      where: {
+        id
+      }
+    });    
+    
+    if(result != ''){ 
+      return res.status(200).json(result);
+    } else {
+      return res.status(200).json([]);
+    }
+  }
+  catch(error){
+    next(error);
+  }
+}
+
 export const obtenerMovimientosCliente = async(req,res,next) => {
   const { clienteId } = req.params;
 

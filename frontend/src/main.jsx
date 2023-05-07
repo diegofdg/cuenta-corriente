@@ -7,6 +7,7 @@ import Movimiento , { loader as movimientosLoader }from './pages/Movimientos.jsx
 import AgregarCliente, { action as agregarClienteAction } from './pages/AgregarCliente.jsx';
 import AgregarMovimiento, { action as agregarMovimientoAction } from './pages/AgregarMovimiento.jsx';
 import EditarCliente, { action as editarClienteAction, loader as editarClienteLoader } from './pages/EditarCliente.jsx';
+import EditarMovimiento, { action as editarMovimientoAction, loader as editarMovimientoLoader } from './pages/EditarMovimiento.jsx';
 import './index.css';
 
 const router = createBrowserRouter([
@@ -23,6 +24,13 @@ const router = createBrowserRouter([
         path: '/movimientos/:clienteId/consulta',
         element: <Movimiento />,
         loader: movimientosLoader
+      },
+      ,
+      {
+        path: '/movimientos/:id/editar',
+        element: <EditarMovimiento />,
+        loader: editarMovimientoLoader,
+        action: editarMovimientoAction
       },
       {
         path: '/clientes/agregar',

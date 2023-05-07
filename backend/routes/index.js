@@ -1,6 +1,6 @@
 import express from "express";
 import { obtenerClientes, obtenerCliente, agregarCliente, editarCliente, eliminarCliente } from "../controllers/clienteController.js";
-import { obtenerMovimientos, obtenerMovimientosCliente, agregarMovimiento } from "../controllers/movimientoController.js";
+import { obtenerMovimientos, obtenerMovimiento, obtenerMovimientosCliente, agregarMovimiento, editarMovimiento } from "../controllers/movimientoController.js";
 
 const router = express.Router();
 
@@ -13,6 +13,8 @@ router.get('/api/clientes/:clienteId',obtenerCliente);
 router.post('/api/clientes/:clienteId',editarCliente);
 router.delete('/api/clientes/:clienteId',eliminarCliente);
 router.get('/api/movimientos',obtenerMovimientos);
+router.get('/api/movimiento/:id',obtenerMovimiento);
+router.post('/api/movimiento/:id',editarMovimiento);
 router.get('/api/movimientos/:clienteId',obtenerMovimientosCliente);
 router.post('/api/movimientos/:clienteId',agregarMovimiento);
 
