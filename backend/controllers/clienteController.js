@@ -79,3 +79,25 @@ export const editarCliente = async(req,res,next) => {
     next(error);
   }
 }
+
+export const eliminarCliente = async(req,res,next) => {
+  const { clienteId } = req.params;
+  console.log(clienteId);
+  try{    
+    const result = await Cliente.update({
+      estado: 0
+    },{
+      where: {
+        id: clienteId
+      }
+    });
+    if(result != ''){ 
+      return res.status(200).json(result);
+    } else {
+      return res.status(200).json([]);
+    }
+  }
+  catch(error){
+    next(error);
+  }
+}

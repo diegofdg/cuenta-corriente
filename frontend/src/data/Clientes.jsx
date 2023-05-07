@@ -45,9 +45,18 @@ export async function editarCliente(clienteId, datos) {
       }
     }
     const { data } = await clienteAxios.post(`/clientes/${clienteId}`, datos, config);
-    console.log(data)
     alert('Cliente Editado');
     return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+}
+
+export async function eliminarCliente(clienteId) {
+  try {
+    await clienteAxios.delete(`/clientes/${clienteId}`);
+    alert('Cliente Eliminado');
+    
   } catch (error) {
     console.log(error.message);
   }
