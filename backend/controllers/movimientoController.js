@@ -44,7 +44,7 @@ export const obtenerMovimientosCliente = async(req,res,next) => {
         attributes: ['id', 'fecha', 'detalle', 'importe'],
         include: [
           {
-            attributes: ['nombre'],
+            attributes: ['id','nombre'],
             model: Cliente,
             where: {
               id: clienteId

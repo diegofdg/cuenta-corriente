@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useLoaderData, Link } from 'react-router-dom';
+import { useLoaderData, Link, useParams } from 'react-router-dom';
 import { obtenerMovimientosCliente } from "../data/Movimientos";
 import Movimiento from "../components/Movimiento";
 
@@ -11,6 +11,7 @@ export function loader({params}) {
 
 const Movimientos = () => {
   const movimientos = useLoaderData();
+  const params = useParams();
   const [ total, setTotal ] = useState([]);
   const [ cliente, setCliente ] = useState('');
 
@@ -58,6 +59,14 @@ const Movimientos = () => {
           </table>
         ) : 'No hay movimientos registrados'}
       </div>
+      <br /><br />
+      <Link
+        to={`/movimientos/${params?.clienteId}/agregar`}
+      >
+        <button type="button">
+          Agregar Movimiento
+        </button>
+      </Link>
       <br /><br />
       <div>Página 1 de 1</div>
     </>

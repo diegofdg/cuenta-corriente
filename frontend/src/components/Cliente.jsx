@@ -1,4 +1,4 @@
-import { Link, Form } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { eliminarCliente } from '../data/Clientes';
 
 const Cliente = ({clientes}) => {
@@ -29,17 +29,16 @@ const Cliente = ({clientes}) => {
             <Link
               to={`/movimientos/${cliente.id}/consulta`}
             >
-              Ver Deuda
+              <button type="button">
+                Ver Deuda
+              </button>
             </Link>
             <Link
-              to={`/movimientos/${cliente.id}/agregar`}
+              to={`/clientes/${cliente.id}/editar`}
             >
-              Agregar Movimiento
-            </Link>
-            <Link
-                to={`/clientes/${cliente.id}/editar`}
-              >
+              <button type="button">
                 Editar Cliente
+              </button>
             </Link>            
             <button 
               onClick={()=>{
