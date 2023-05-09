@@ -24,8 +24,9 @@ export const agregarCliente = async(req,res,next) => {
     if(!nombre) {
       return res.status(400).json([]);
     };
+    const nombreMayusculas = nombre.toUpperCase();
     const result = await Cliente.create({
-      nombre, cuil, telefono, email, condicion
+      nombreMayusculas, cuil, telefono, email, condicion
     });
     if(result != ''){ 
       return res.status(200).json(result);
@@ -56,14 +57,14 @@ export const obtenerCliente = async(req,res,next) => {
 
 export const editarCliente = async(req,res,next) => {
   const { clienteId } = req.params;
-  console.log(clienteId);
   const { nombre, cuil, telefono, email, condicion } = req.body;
   try{
     if(!nombre) {
       return res.status(400).json([]);
     };
+    const nombreMayusculas = nombre.toUpperCase();
     const result = await Cliente.update({
-      nombre, cuil, telefono, email, condicion
+      nombreMayusculas, cuil, telefono, email, condicion
     },{
       where: {
         id: clienteId

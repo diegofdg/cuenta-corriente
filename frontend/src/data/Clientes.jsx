@@ -37,7 +37,6 @@ export async function obtenerCliente(clienteId) {
 }
 
 export async function editarCliente(clienteId, datos) {
-  console.log(datos, clienteId);
   try {
     const config = {
       headers: {
