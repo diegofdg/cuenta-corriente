@@ -1,21 +1,37 @@
-import { obtenerClientes } from '../data/Clientes';
-import { useLoaderData, Link } from 'react-router-dom';
+import { obtenerClientes, obtenerClientesPorPagina } from '../data/Clientes';
+import { useLoaderData, Link, redirect, useParams } from 'react-router-dom';
 import Cliente from '../components/Cliente';
 import { useEffect, useState } from 'react';
 
-export function loader() {
-  const clientes = obtenerClientes();
+export function loader({params}) {
+  let { pagina } = params;
+  const clientes = obtenerClientesPorPagina(pagina);
   return clientes;
 }
 
 const Clientes = () => {
   const clientes = useLoaderData();
+  const params = useParams();
   const [ texto, setTexto ] = useState('');
   const [ clientesFiltrados, setClientesFiltrados ] = useState([]);
+  const [ pagina, setPagina ] = useState(1);
+  const [ cantidadClientes, setCantidadClientes ] = useState(0);
 
-  useEffect(()=> {
+
+  useEffect( ()=> {
+    contarPaginas().then(cantidad => { setCantidadClientes(cantidad); });
     setClientesFiltrados(clientes);
   },[]);
+
+
+  useEffect(()=> {
+    setPagina(Number(params?.pagina));
+  },[]);
+
+  const contarPaginas = async () => {
+    const totalPaginas = await obtenerClientes();
+    return totalPaginas;
+  }
 
   const handleChangeTexto = (e) => {
     if(e.target.value.trim() != ''){
@@ -48,6 +64,7 @@ const Clientes = () => {
         <button
           onClick={handleChangeBusqueda}
         >Buscar</button>
+        <br />
         {clientesFiltrados?.length > 0 ? (
           clientesFiltrados[0] === 'Ha ocurrido un error' ? 
           'Ha ocurrido un error' : 
@@ -81,7 +98,15 @@ const Clientes = () => {
           Agregar Cliente
         </Link>
       <br /><br />
-      <div>Página 1 de 1</div>
+      <div>
+        <p>Página {pagina} de {Math.floor(cantidadClientes/5)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {pagina < Math.floor(cantidadClientes/5) ? (
+          <a href={`/clientes/pagina/${pagina+1}`}>Página siguiente</a>        
+        ) : (
+          <a href={`/clientes/pagina/${pagina-1}`}>Página anterior</a>        
+        )}
+        </p>
+      </div>
     </>
   )
 }

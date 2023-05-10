@@ -1,8 +1,33 @@
 import Cliente from "../models/Cliente.js";
+import Sequelize from 'sequelize';
 
 export const obtenerClientes = async(req,res,next) => {
   try{
     const result = await Cliente.findAll({
+      attributes: [[Sequelize.fn('COUNT', Sequelize.col('nombre')), 'cantidad_clientes']],
+      where: {
+          estado: 1
+      }
+    });
+    if(result != ''){ 
+      return res.status(200).json(result);
+    } else {
+      return res.status(200).json([]);
+    }
+  }
+  catch(error){
+    next(error);
+  }
+}
+
+export const obtenerClientesPorPagina = async(req,res,next) => {
+  const { pagina } = req.params;  
+  const offset = (pagina - 1) * 5;
+  const limit = 5;
+  try{
+    const result = await Cliente.findAll({
+      limit,
+      offset,
       where: {
           estado: 1
       }

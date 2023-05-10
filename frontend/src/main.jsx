@@ -9,6 +9,7 @@ import AgregarMovimiento, { action as agregarMovimientoAction } from './pages/Ag
 import EditarCliente, { action as editarClienteAction, loader as editarClienteLoader } from './pages/EditarCliente.jsx';
 import EditarMovimiento, { action as editarMovimientoAction, loader as editarMovimientoLoader } from './pages/EditarMovimiento.jsx';
 import './index.css';
+import Login, { action as loginAction }from './pages/Login.jsx';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
+        element: <Login />,
+        action: loginAction
+      },
+      {
+        path: '/clientes/pagina/:pagina',
         element: <Cliente />,
         loader: clientesLoader
       },
