@@ -1,7 +1,7 @@
 import Cliente from "../models/Cliente.js";
 import Sequelize from 'sequelize';
 
-export const obtenerClientes = async(req,res,next) => {
+export const contarClientes = async(req,res,next) => {
   try{
     const result = await Cliente.findAll({
       attributes: [[Sequelize.fn('COUNT', Sequelize.col('nombre')), 'cantidad_clientes']],
@@ -20,8 +20,29 @@ export const obtenerClientes = async(req,res,next) => {
   }
 }
 
+export const obtenerClientes = async(req,res,next) => {
+  try{
+    const result = await Cliente.findAll({
+      where: {
+          estado: 1
+      },
+      order: [
+        ['nombre', 'asc']
+      ]
+    });
+    if(result != ''){ 
+      return res.status(200).json(result);
+    } else {
+      return res.status(200).json([]);
+    }
+  }
+  catch(error){
+    next(error);
+  }
+}
+
 export const obtenerClientesPorPagina = async(req,res,next) => {
-  const { pagina } = req.params;  
+  const { pagina } = req.params;
   const offset = (pagina - 1) * 5;
   const limit = 5;
   try{
@@ -109,7 +130,7 @@ export const editarCliente = async(req,res,next) => {
 export const eliminarCliente = async(req,res,next) => {
   const { clienteId } = req.params;
   console.log(clienteId);
-  try{    
+  try{
     const result = await Cliente.update({
       estado: 0
     },{

@@ -1,5 +1,5 @@
 import express from "express";
-import { obtenerClientes, obtenerCliente, agregarCliente, editarCliente, eliminarCliente, obtenerClientesPorPagina } from "../controllers/clienteController.js";
+import { contarClientes, obtenerClientes, obtenerCliente, agregarCliente, editarCliente, eliminarCliente, obtenerClientesPorPagina } from "../controllers/clienteController.js";
 import { obtenerMovimientos, obtenerMovimiento, obtenerMovimientosCliente, agregarMovimiento, editarMovimiento } from "../controllers/movimientoController.js";
 
 const router = express.Router();
@@ -7,6 +7,7 @@ const router = express.Router();
 router.use(express.json());
 router.use(express.urlencoded({ extended: true }));
 
+router.get('/api/clientes/contar',contarClientes);
 router.get('/api/clientes',obtenerClientes);
 router.post('/api/clientes',agregarCliente);
 router.get('/api/clientes/pagina/:pagina',obtenerClientesPorPagina);

@@ -27,9 +27,11 @@ const Movimientos = () => {
     <>
       <nav>
         <Link
-          to="/"
+          to="/clientes/pagina/1"
         >
-          Inicio
+          <button type="button">
+            Inicio
+          </button>
         </Link>
       </nav> 
       <div>

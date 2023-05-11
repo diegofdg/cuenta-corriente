@@ -1,11 +1,10 @@
-import { obtenerClientes, obtenerClientesPorPagina } from '../data/Clientes';
+import { contarClientes, obtenerClientes } from '../data/Clientes';
 import { useLoaderData, Link, redirect, useParams } from 'react-router-dom';
 import Cliente from '../components/Cliente';
 import { useEffect, useState } from 'react';
 
-export function loader({params}) {
-  let { pagina } = params;
-  const clientes = obtenerClientesPorPagina(pagina);
+export function loader() {
+  const clientes = obtenerClientes();
   return clientes;
 }
 
@@ -17,43 +16,60 @@ const Clientes = () => {
   const [ pagina, setPagina ] = useState(1);
   const [ cantidadClientes, setCantidadClientes ] = useState(0);
 
-
   useEffect( ()=> {
     contarPaginas().then(cantidad => { setCantidadClientes(cantidad); });
-    setClientesFiltrados(clientes);
   },[]);
-
 
   useEffect(()=> {
     setPagina(Number(params?.pagina));
   },[]);
 
+  useEffect(()=> {
+    mostrarClientesPagina();
+  },[pagina]);
+
+  const mostrarClientesPagina = () => {
+    const comienzo = (pagina - 1) * 5 || 0;
+    const fin = comienzo + 5;
+    const lista = [];
+    for (let i = comienzo; i < fin; i++) {
+      lista.push(clientes[i]);
+    }
+    setClientesFiltrados(lista);
+  }
+
   const contarPaginas = async () => {
-    const totalPaginas = await obtenerClientes();
+    const totalPaginas = await contarClientes();
     return totalPaginas;
   }
 
   const handleChangeTexto = (e) => {
     if(e.target.value.trim() != ''){
       setTexto(e.target.value);
-      const clientesFiltrados = clientes.filter(cliente => cliente.nombre.search(texto.toUpperCase()) != -1);
-      setClientesFiltrados(clientesFiltrados);
     } else {
       setTexto('');
-      setClientesFiltrados(clientes);
-    }    
+      mostrarClientesPagina();
+    }
   }
 
   const handleChangeBusqueda = () => {
-    const clientesFiltrados = clientes.filter(cliente => cliente.nombre.search(texto.toUpperCase()) != -1);
-    setClientesFiltrados(clientesFiltrados);
+    if(Number(texto)) {
+      const clientesFiltrados = clientes.filter(cliente => cliente.id == texto);
+      setClientesFiltrados(clientesFiltrados);
+    } else if(texto.length > 3) {
+      const clientesFiltrados = clientes.filter(cliente => cliente.nombre.search(texto.toUpperCase()) != -1);
+      setClientesFiltrados(clientesFiltrados);
+    } else {
+      alert('Para buscar ingresa más de tres caracteres o un número de cliente')
+
+    }
   }
  
   return (
     <>
       <div>
         <label htmlFor="caja-busqueda">
-          Nombre Cliente:
+          Nombre o Id del Cliente:
         </label>
         <input
           id="caja-busqueda"
@@ -89,21 +105,31 @@ const Clientes = () => {
               </tbody>
             </table>
           </>
-        ) : 'No hay clientes registrados'}
+        ) : 'No existen registros para mostrar'}
       </div>
       <br /><br />
         <Link
           to={`/clientes/agregar`}
         >
-          Agregar Cliente
+          <button type="button">
+            Agregar Cliente
+          </button>
         </Link>
       <br /><br />
       <div>
         <p>Página {pagina} de {Math.floor(cantidadClientes/5)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {pagina < Math.floor(cantidadClientes/5) ? (
-          <a href={`/clientes/pagina/${pagina+1}`}>Página siguiente</a>        
+          <a href={`/clientes/pagina/${pagina+1}`}>
+            <button type="button">
+              Página siguiente
+            </button>
+          </a>
         ) : (
-          <a href={`/clientes/pagina/${pagina-1}`}>Página anterior</a>        
+          <a href={`/clientes/pagina/${pagina-1}`}>
+            <button type="button">
+              Página anterior
+            </button>
+          </a>
         )}
         </p>
       </div>
