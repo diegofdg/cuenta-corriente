@@ -33,7 +33,9 @@ const Clientes = () => {
     const fin = comienzo + 5;
     const lista = [];
     for (let i = comienzo; i < fin; i++) {
-      lista.push(clientes[i]);
+      if(clientes[i]) {
+        lista.push(clientes[i]);
+      }
     }
     setClientesFiltrados(lista);
   }
@@ -101,6 +103,7 @@ const Clientes = () => {
               <tbody>
                 <Cliente
                   clientes={clientesFiltrados}
+                  setClientes={setClientesFiltrados}
                 />
               </tbody>
             </table>
@@ -117,8 +120,8 @@ const Clientes = () => {
         </Link>
       <br /><br />
       <div>
-        <p>Página {pagina} de {Math.floor(cantidadClientes/5)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        {pagina < Math.floor(cantidadClientes/5) ? (
+        <p>Página {pagina} de {Math.ceil(cantidadClientes/5)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        {pagina < Math.ceil(cantidadClientes/5) ? (
           <a href={`/clientes/pagina/${pagina+1}`}>
             <button type="button">
               Página siguiente

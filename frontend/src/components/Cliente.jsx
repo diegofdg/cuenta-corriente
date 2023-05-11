@@ -1,7 +1,15 @@
 import { Link } from 'react-router-dom';
 import { eliminarCliente } from '../data/Clientes';
 
-const Cliente = ({clientes}) => {
+const Cliente = ({clientes, setClientes}) => {
+
+  const handleEliminarCliente = (id) => {
+    if(confirm('¿Deseas eliminar este registro?')) {
+      eliminarCliente(id);
+      const clientesActualizados = clientes.filter(cliente=>cliente.id != id);
+      setClientes(clientesActualizados);
+    }
+  }
 
   return (
     <>
@@ -41,11 +49,7 @@ const Cliente = ({clientes}) => {
               </button>
             </Link>            
             <button 
-              onClick={()=>{
-                if(confirm('¿Deseas eliminar este registro?')) {
-                  eliminarCliente(cliente.id)
-                }
-              }}                
+              onClick={()=>handleEliminarCliente(cliente.id)}                
             >
               Eliminar
             </button>
