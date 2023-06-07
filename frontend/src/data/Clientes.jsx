@@ -23,7 +23,6 @@ export async function obtenerClientes() {
 export async function obtenerClientesPorPagina(pagina = 1) {
   try {
     const { data } = await clienteAxios(`/clientes/pagina/${pagina}`);
-    console.log(data)
     return data;
   } catch (error) {
     console.error(error);

@@ -120,6 +120,7 @@ const Clientes = () => {
         </Link>
       <br /><br />
       <div>
+        {/* TODO: LA PAGINA ANTERIOR CUANDO HAY TRES PAGINAS NO SE MUESTRA */}
         <p>Página {pagina} de {Math.ceil(cantidadClientes/5)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         {pagina < Math.ceil(cantidadClientes/5) ? (
           <a href={`/clientes/pagina/${pagina+1}`}>

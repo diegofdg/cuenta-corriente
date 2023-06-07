@@ -1,5 +1,4 @@
-const FormularioMovimientos = ({movimiento}) => {
-  console.log(movimiento.clienteId)
+const FormularioMovimientos = ({movimiento,clienteId}) => {
   return (
     <>
       <div className="oculto">
@@ -12,7 +11,7 @@ const FormularioMovimientos = ({movimiento}) => {
           id="clienteId"
           type="number"
           name="clienteId"
-          defaultValue={movimiento?.clienteId}
+          defaultValue={movimiento?.clienteId || clienteId}
         />
       </div>
       <div>

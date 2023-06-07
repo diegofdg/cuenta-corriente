@@ -6,7 +6,7 @@ export const contarClientes = async(req,res,next) => {
     const result = await Cliente.findAll({
       attributes: [[Sequelize.fn('COUNT', Sequelize.col('nombre')), 'cantidad_clientes']],
       where: {
-          estado: 1
+        estado: 1
       }
     });
     if(result != ''){ 
@@ -24,7 +24,7 @@ export const obtenerClientes = async(req,res,next) => {
   try{
     const result = await Cliente.findAll({
       where: {
-          estado: 1
+        estado: 1
       },
       order: [
         ['nombre', 'asc']
@@ -50,7 +50,7 @@ export const obtenerClientesPorPagina = async(req,res,next) => {
       limit,
       offset,
       where: {
-          estado: 1
+        estado: 1
       }
     });
     if(result != ''){ 
@@ -65,14 +65,15 @@ export const obtenerClientesPorPagina = async(req,res,next) => {
 }
 
 export const agregarCliente = async(req,res,next) => {
-  const { nombre, cuil, telefono, email, condicion } = req.body;
+  const { cuil, telefono, email, condicion } = req.body;
+  let nombre = req.body.nombre;
   try{
     if(!nombre) {
       return res.status(400).json([]);
     };
-    const nombreMayusculas = nombre.toUpperCase();
+    nombre = nombre.toUpperCase();
     const result = await Cliente.create({
-      nombreMayusculas, cuil, telefono, email, condicion
+      nombre, cuil, telefono, email, condicion
     });
     if(result != ''){ 
       return res.status(200).json(result);
@@ -87,7 +88,6 @@ export const agregarCliente = async(req,res,next) => {
 
 export const obtenerCliente = async(req,res,next) => {
   const { clienteId } = req.params;
-
   try{
     const result = await Cliente.findByPk(clienteId);
     if(result != ''){ 
@@ -103,14 +103,15 @@ export const obtenerCliente = async(req,res,next) => {
 
 export const editarCliente = async(req,res,next) => {
   const { clienteId } = req.params;
-  const { nombre, cuil, telefono, email, condicion } = req.body;
+  const { cuil, telefono, email, condicion } = req.body;
+  let nombre = req.body.nombre;
   try{
     if(!nombre) {
       return res.status(400).json([]);
     };
-    const nombreMayusculas = nombre.toUpperCase();
+    nombre = nombre.toUpperCase();
     const result = await Cliente.update({
-      nombreMayusculas, cuil, telefono, email, condicion
+      nombre, cuil, telefono, email, condicion
     },{
       where: {
         id: clienteId

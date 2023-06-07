@@ -25,14 +25,13 @@ export async function action({ request, params }) {
   }
 
   await editarMovimiento(params.id, datos);
-  console.log(datos)
   return redirect(`/movimientos/${datos.clienteId}/consulta`);
 }
 
 const EditarMovimiento = () => {
   const movimiento = useLoaderData();
   const errores = useActionData();
-  console.log(movimiento)
+
   return (
     <>
       {errores?.length ? <Error>{errores}</Error> : ''}

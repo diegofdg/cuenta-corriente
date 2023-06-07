@@ -19,12 +19,13 @@ export async function action({ request, params }) {
   }
 
   await agregarMovimiento(params.clienteId, datos);
-  return redirect('/');
+  return redirect('/clientes/pagina/1');
 }
 
 function AgregarMovimiento() {
   const navigate = useNavigate();
   const errores = useActionData();
+  const params = useParams();
 
   return (
     <>
@@ -32,7 +33,7 @@ function AgregarMovimiento() {
       <div>
         <button
           type='button'
-          onClick={() => navigate("/")}
+          onClick={() => navigate(-1)}
         >
           Volver
         </button>
@@ -44,6 +45,7 @@ function AgregarMovimiento() {
           method="POST"
         >
           <FormularioMovimientos
+            clienteId={params.clienteId}
           />
           <input
             type="submit"

@@ -19,7 +19,7 @@ export async function action({ request }) {
   }
 
   await agregarCliente(datos);
-  return redirect('/');
+  return redirect("/clientes/pagina/1");
 }
 
 function AgregarCliente() {

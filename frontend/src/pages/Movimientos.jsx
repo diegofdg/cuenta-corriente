@@ -14,6 +14,11 @@ const Movimientos = () => {
   const params = useParams();
   const [ total, setTotal ] = useState([]);
   const [ cliente, setCliente ] = useState('');
+  const [ clienteId, setClienteId ] = useState(null);
+
+  useEffect(()=>{
+    setClienteId(params.clienteId);
+  },[]);
 
   useEffect(()=> {
     const calculoTotal = movimientos.reduce((total, movimiento) => total + Number(movimiento.importe), 0).toFixed(2) || 0;

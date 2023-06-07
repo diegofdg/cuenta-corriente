@@ -13,7 +13,6 @@ export function loader({params}) {
 export async function action({ request, params }) {
   const formData = await request.formData();
   const datos = Object.fromEntries(formData);
-  console.log(datos)
 
   // Validación
   const errores = [];
@@ -27,8 +26,7 @@ export async function action({ request, params }) {
   }
 
   await editarCliente(params.clienteId, datos);
-  console.log(datos)
-  return redirect('/');  
+  return redirect("/clientes/pagina/1");
 }
 
 const EditarCliente = () => {

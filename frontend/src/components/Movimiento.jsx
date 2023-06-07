@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 
 const Movimiento = ({movimientos}) => {
-  const params = useParams();
 
   return (
     <>
