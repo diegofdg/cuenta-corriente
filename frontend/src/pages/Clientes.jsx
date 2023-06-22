@@ -2,6 +2,7 @@ import { contarClientes, obtenerClientes } from '../data/Clientes';
 import { useLoaderData, Link, redirect, useParams } from 'react-router-dom';
 import Cliente from '../components/Cliente';
 import { useEffect, useState } from 'react';
+import BotonPaginado from '../components/BotonPaginado';
 
 export function loader() {
   const clientes = obtenerClientes();
@@ -15,6 +16,7 @@ const Clientes = () => {
   const [ clientesFiltrados, setClientesFiltrados ] = useState([]);
   const [ pagina, setPagina ] = useState(1);
   const [ cantidadClientes, setCantidadClientes ] = useState(0);
+  const [ paginando, setPaginando ] = useState(true);
 
   useEffect( ()=> {
     contarPaginas().then(cantidad => { setCantidadClientes(cantidad); });
@@ -50,6 +52,7 @@ const Clientes = () => {
       setTexto(e.target.value);
     } else {
       setTexto('');
+      setPaginando(true);
       mostrarClientesPagina();
     }
   }
@@ -58,12 +61,14 @@ const Clientes = () => {
     if(Number(texto)) {
       const clientesFiltrados = clientes.filter(cliente => cliente.id == texto);
       setClientesFiltrados(clientesFiltrados);
+      setPaginando(false);
     } else if(texto.length > 3) {
       const clientesFiltrados = clientes.filter(cliente => cliente.nombre.search(texto.toUpperCase()) != -1);
       setClientesFiltrados(clientesFiltrados);
+      setPaginando(false);
     } else {
-      alert('Para buscar ingresa más de tres caracteres o un número de cliente')
-
+      alert('Para buscar ingresa más de tres caracteres o un número de cliente');
+      paginando(true);
     }
   }
  
@@ -119,24 +124,27 @@ const Clientes = () => {
           </button>
         </Link>
       <br /><br />
-      <div>
-        {/* TODO: LA PAGINA ANTERIOR CUANDO HAY TRES PAGINAS NO SE MUESTRA */}
-        <p>Página {pagina} de {Math.ceil(cantidadClientes/5)} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        {pagina < Math.ceil(cantidadClientes/5) ? (
-          <a href={`/clientes/pagina/${pagina+1}`}>
-            <button type="button">
-              Página siguiente
-            </button>
-          </a>
-        ) : (
-          <a href={`/clientes/pagina/${pagina-1}`}>
-            <button type="button">
-              Página anterior
-            </button>
-          </a>
-        )}
-        </p>
-      </div>
+      {paginando &&       
+        <div>
+          <p>
+            {pagina <= Math.ceil(cantidadClientes/5) && pagina > 1 && 
+              <BotonPaginado
+                tipo={'Anterior'}
+                pagina={pagina-1}
+              />
+            }
+            <span>
+              Página {pagina} de {Math.ceil(cantidadClientes/5)}
+            </span>
+            {pagina < Math.ceil(cantidadClientes/5) &&
+              <BotonPaginado
+                tipo={'Siguiente'}
+                pagina={pagina+1}
+              />
+            }
+          </p>
+        </div>
+      }
     </>
   )
 }
