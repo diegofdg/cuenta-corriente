@@ -1,31 +1,34 @@
 const FormularioLogin = () => {
   return (
     <>
-      <div>
+      <div className="mb-3">
         <label
           htmlFor="email"
+          className="form-label"
         >
           Email:
         </label>
-        <input 
+        <input
           id="email"
           type="email"
+          className="form-control"
           placeholder="Tu Email"
-          name="email"
           defaultValue="correo@correo.com"
-        />
+        >          
+        </input>
       </div>
-      <div>
+      <div className="mb-3">
         <label
           htmlFor="password"
+          className="form-label"
         >
           Password:
         </label>
-        <input 
+        <input
           id="password"
           type="password"
+          className="form-control"
           placeholder="Tu Password"
-          name="password"
           defaultValue="admin1234"
         />
       </div>

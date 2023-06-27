@@ -1,4 +1,4 @@
-import { Form, Link, useActionData, redirect, useNavigate } from "react-router-dom";
+import { Form, useActionData, redirect } from "react-router-dom";
 import FormularioLogin from "../components/FormularioLogin";
 import Error from '../components/Error';
 
@@ -21,24 +21,26 @@ export async function action({ request }) {
 }
 
 const Login = () => {  
-  const navigate = useNavigate();
   const errores = useActionData();
   return (
     <>
-      <h1>Inicia Sesión</h1>
-      <div>
-        {errores?.length ? <Error>{errores}</Error> : ''}
-        <Form
-          method="POST"
-        >
-          <FormularioLogin />
-          <input
-            type="submit"
-            value="Iniciar Sesión"
-          />
-        </Form>
+      <h2 className="fs-3 mb-3">Inicia Sesión</h2>
+      <div className="row">
+        <div className="col col-sm-6 col-md-5 col-lg-4 col-xl-3">
+          {errores?.length ? <Error>{errores}</Error> : ''}
+          <Form
+            method="POST"
+          >
+            <FormularioLogin />
+            <button
+              type="submit"
+              className="btn btn-primary"
+            >
+              Iniciar Sesión
+            </button>
+          </Form>
+        </div>
       </div>
-      
     </>
   )
 }
