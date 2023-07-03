@@ -34,25 +34,37 @@ const Cliente = ({clientes, setClientes}) => {
             {cliente.condicion}
           </td>
           <td>
-            <Link
-              to={`/movimientos/${cliente.id}/consulta`}
-            >
-              <button type="button">
-                Ver Deuda
-              </button>
-            </Link>
-            <Link
-              to={`/clientes/${cliente.id}/editar`}
-            >
-              <button type="button">
-                Editar Cliente
-              </button>
-            </Link>            
-            <button 
-              onClick={()=>handleEliminarCliente(cliente.id)}                
-            >
-              Eliminar
-            </button>
+            <div className='d-flex justify-content-around align-items-start'>
+
+              <Link
+                to={`/movimientos/${cliente.id}/consulta`}
+              >
+                {/* <button type="button">
+                  Ver Deuda
+                </button> */}
+                <i class="fa-solid fa-hand-holding-dollar"></i>              
+              </Link>
+              <Link
+                to={`/clientes/${cliente.id}/editar`}
+              >
+                {/* <button type="button">
+                  Editar Cliente
+                </button> */}
+                <i class="fa-solid fa-pen-to-square"></i>
+              </Link>            
+              {/* <button 
+                onClick={()=>handleEliminarCliente(cliente.id)}                
+              >
+                Eliminar
+              </button> */}
+              <Link>
+                <i
+                  onClick={()=>handleEliminarCliente(cliente.id)}
+                  class="fa-solid fa-trash"
+                >              
+                </i>
+              </Link>
+            </div>
           </td>
         </tr>
       ))}

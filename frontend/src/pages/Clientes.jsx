@@ -75,24 +75,35 @@ const Clientes = () => {
   return (
     <>
       <div>
-        <label htmlFor="caja-busqueda">
-          Nombre o Id del Cliente:
-        </label>
-        <input
-          id="caja-busqueda"
-          type="text"
-          onChange={handleChangeTexto}
-          value={texto}
-          />
-        <button
-          onClick={handleChangeBusqueda}
-        >Buscar</button>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="caja-busqueda" class="col-form-label">Nombre o Id del Cliente:</label>
+          </div>
+          <div class="col-auto">
+            <input
+              type="text"
+              id="caja-busqueda"
+              class="form-control"
+              onChange={handleChangeTexto}
+              value={texto}
+            />
+          </div>
+          <div class="col-auto">
+            <button
+              class="btn btn-primary"
+              type="button"
+              onClick={handleChangeBusqueda}
+            >
+              Button
+            </button>
+          </div>
+        </div>        
         <br />
         {clientesFiltrados?.length > 0 ? (
           clientesFiltrados[0] === 'Ha ocurrido un error' ? 
           'Ha ocurrido un error' : 
           <>
-            <table>
+            <table className='table table-striped mt-3 caption-top'>
               <caption>LISTADO DE CLIENTES</caption>
               <thead>
                 <tr>
@@ -115,11 +126,14 @@ const Clientes = () => {
           </>
         ) : 'No existen registros para mostrar'}
       </div>
-      <br /><br />
+      <br />
         <Link
           to={`/clientes/agregar`}
         >
-          <button type="button">
+          <button
+            type="button"
+            class="btn btn-primary"
+          >
             Agregar Cliente
           </button>
         </Link>
@@ -133,7 +147,7 @@ const Clientes = () => {
                 pagina={pagina-1}
               />
             }
-            <span>
+            <span className={pagina <= Math.ceil(cantidadClientes/5) && pagina > 1 ? 'm-3' : 'm-3 ms-0'}>
               Página {pagina} de {Math.ceil(cantidadClientes/5)}
             </span>
             {pagina < Math.ceil(cantidadClientes/5) &&
